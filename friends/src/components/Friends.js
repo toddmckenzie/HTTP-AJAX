@@ -5,10 +5,13 @@ import React from 'react';
 const Friends = props => {
   return (
     <div>
-      <form onSubmit='props.addFriend'>
-        <input value='name' onChange={props.handleChange}></input>
-        <input value='age' onChange={props.handleChange}></input>
-        <input value='email' onChange={props.handleChange}></input>
+      {props.friends.map(friend => {
+         <p>{friend}</p>
+      })}
+      <form onSubmit={props.addFriend}>
+        <input type='text' placeholder='name' name='name' onChange={props.handleChange}></input>
+        <input type='text' placeholder='age' name='age' onChange={props.handleChange}></input>
+        <input type='text' placeholder='email' name='email' onChange={props.handleChange}></input>
       </form>
     </div>
   )

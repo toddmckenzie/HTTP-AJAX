@@ -8,7 +8,12 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      friends: []
+      friends: [],
+      newFriend: {
+        name: '',
+        age: '',
+        email: ''
+      }
     }
   }
 
@@ -22,17 +27,26 @@ class App extends React.Component {
       .catch(err => console.log(err))
   }
 
-  addFriend() {
-    //axios
-      //.Post()
-      console.log('hi')
+  addFriend = event => {
+    event.preventDefault();
+    axios.post('http://localhost:3000', this.newFriend)
+      .then(res => {
+        //this.setState(friends: res.data)
+        console.log(res)
+      })
+      .catch(err => {
+        console.log('errr' + err)
+      })
   }
 
-  handleChange() {
-    console.log('yo')
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value })
   }
 
   render() {
+    console.log(this.state.friends)
     return (
       <div className="App">
         <Route path='/' render={props =>  <Friends  {...props}
