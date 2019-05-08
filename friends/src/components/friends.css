@@ -1,12 +1,28 @@
+.container {
+  margin: 0 auto;
+  background-color: #D3D3D3;
+  height: 100vh;
+}
+
+.friends {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 40px;
+  border: 2px solid gray;
+  background-color: white;
+}
 .flexes {
   display: flex;
   justify-content: space-betweeen;
-  border: 1px solid red;
+  border-bottom: 1px dashed gray;
+  margin: 0 auto;
+  max-width: 1300px;
+  width: 100%;
 }
 .name {
   margin-left: 40px;
   margin-right: 200px;
-  
+
 }
 .age {
   margin-left: 40px;
@@ -15,4 +31,38 @@
 .email {
   margin-left: 40px;
   margin-right: 200px;
+}
+.name1 {
+  margin-left: 40px;
+  margin-right: 200px;
+  font-weight: bolder;
+}
+.age1 {
+  margin-left: 40px;
+  margin-right: 200px;
+  font-weight: bolder;
+}
+.email1 {
+  margin-left: 40px;
+  margin-right: 200px;
+  font-weight: bolder;
+}
+button {
+  border-radius: 20px;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+}
+
+
+input {
+  width: 240px;
+  height: 40px;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
 }

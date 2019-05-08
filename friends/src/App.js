@@ -19,7 +19,6 @@ class App extends React.Component {
     axios
       .get('http://localhost:5000/friends')
       .then(res => {
-        console.log(res)
         this.setState({ friends: res.data})
       })
       .catch(err => console.log(err))
@@ -42,20 +41,14 @@ class App extends React.Component {
         console.log('errr' + err)
       })
   }
+
   handleName = event => {
     this.setState({
         [event.target.name]: event.target.value
     })
     console.log(this.state.name)
     }
-//  handleChange = event => {
-    //this.setState({ newFriend: {
-    //  [event.target.name]: event.target.value,
-      //  [event.target.name]: event.target.value,
-      //  [event.target.name]: event.target.value
-    //} })
-  //  console.log(this.state.newFriend)
-  //}
+
   handleAge = event => {
     this.setState({
         [event.target.name]: event.target.value
@@ -69,7 +62,10 @@ class App extends React.Component {
     })
     console.log(this.state.email)
     }
+  deleteFriend = (deletedFriend) => {
+    const newList = this.state.friends.filter(friend => friend !== deletedFriend);
 
+  }
   render() {
     return (
       <div className="App">
@@ -78,7 +74,9 @@ class App extends React.Component {
         handleName={this.handleName}
         handleAge={this.handleAge}
         handleEmail={this.handleEmail}
-        addFriend={this.addFriend}/>} />
+        addFriend={this.addFriend}
+        deleteFriend={this.deleteFriend}/>}
+        />
       </div>
     );
   }
