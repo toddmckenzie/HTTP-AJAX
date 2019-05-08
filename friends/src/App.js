@@ -19,9 +19,9 @@ class App extends React.Component {
 
   componentDidMount() {
     axios
-      .get('http://localhost:3000')
+      .get('http://localhost:5000/friends')
       .then(res => {
-        //console.log(res))
+        console.log(res)
         this.setState({ friends: res.data})
       })
       .catch(err => console.log(err))
@@ -29,7 +29,7 @@ class App extends React.Component {
 
   addFriend = event => {
     event.preventDefault();
-    axios.post('http://localhost:3000', this.newFriend)
+    axios.post('http://localhost:5000', this.newFriend)
       .then(res => {
         //this.setState(friends: res.data)
         console.log(res)
@@ -40,13 +40,15 @@ class App extends React.Component {
   }
 
   handleChange = event => {
-    this.setState({ [event.target.name]: event.target.value,
+    this.setState({ newFriend: {
       [event.target.name]: event.target.value,
-      [event.target.name]: event.target.value })
+        [event.target.name]: event.target.value,
+        [event.target.name]: event.target.value
+    } })
   }
 
   render() {
-    console.log(this.state.friends)
+    console.log('hi')
     return (
       <div className="App">
         <Route path='/' render={props =>  <Friends  {...props}
