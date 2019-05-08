@@ -9,11 +9,9 @@ class App extends React.Component {
     super();
     this.state = {
       friends: [],
-      newFriend: {
         name: '',
         age: '',
         email: ''
-      }
     }
   }
 
@@ -29,31 +27,57 @@ class App extends React.Component {
 
   addFriend = event => {
     event.preventDefault();
-    axios.post('http://localhost:5000', this.newFriend)
+    axios.post('http://localhost:5000/friends', {
+        name: this.state.name,
+        age: this.state.age,
+        email: this.state.email
+      }
+  )
       .then(res => {
-        //this.setState(friends: res.data)
         console.log(res)
+        this.setState({ friends: res.data })
+
       })
       .catch(err => {
         console.log('errr' + err)
       })
   }
-
-  handleChange = event => {
-    this.setState({ newFriend: {
-      [event.target.name]: event.target.value,
-        [event.target.name]: event.target.value,
+  handleName = event => {
+    this.setState({
         [event.target.name]: event.target.value
-    } })
-  }
+    })
+    console.log(this.state.name)
+    }
+//  handleChange = event => {
+    //this.setState({ newFriend: {
+    //  [event.target.name]: event.target.value,
+      //  [event.target.name]: event.target.value,
+      //  [event.target.name]: event.target.value
+    //} })
+  //  console.log(this.state.newFriend)
+  //}
+  handleAge = event => {
+    this.setState({
+        [event.target.name]: event.target.value
+    })
+    console.log(this.state.age)
+    }
+
+  handleEmail = event => {
+    this.setState({
+        [event.target.name]: event.target.value
+    })
+    console.log(this.state.email)
+    }
 
   render() {
-    console.log('hi')
     return (
       <div className="App">
         <Route path='/' render={props =>  <Friends  {...props}
         friends={this.state.friends}
-        handleChange={this.handleChange}
+        handleName={this.handleName}
+        handleAge={this.handleAge}
+        handleEmail={this.handleEmail}
         addFriend={this.addFriend}/>} />
       </div>
     );
