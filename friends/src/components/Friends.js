@@ -16,7 +16,7 @@ const Friends = props => {
           <p className='name'>{friend.name}</p>
           <p className='age'>{friend.age}</p>
           <p className='email'>{friend.email}</p>
-          <button className='delete' onClick={props.deleteFriend}>Delete</button>
+          <button className='delete' onClick={() => props.deleteFriend(friend)}>Delete</button>
         </div>
       )}
     </div>
@@ -25,7 +25,7 @@ const Friends = props => {
         <input type='text' placeholder='name' name='name' onChange={props.handleName}></input>
         <input type='text' placeholder='age' name='age' onChange={props.handleAge}></input>
         <input type='text' placeholder='email' name='email' onChange={props.handleEmail}></input>
-        <button onClick={props.addFriend}>Add Friend</button>
+        <button onClick={props.addFriend} className='add'>Add Friend</button>
       </form>
     </div>
   )

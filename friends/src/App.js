@@ -19,23 +19,23 @@ class App extends React.Component {
     axios
       .get('http://localhost:5000/friends')
       .then(res => {
+        console.log(res.data)
         this.setState({ friends: res.data})
       })
       .catch(err => console.log(err))
   }
 
+
   addFriend = event => {
     event.preventDefault();
     axios.post('http://localhost:5000/friends', {
-        name: this.state.name,
-        age: this.state.age,
-        email: this.state.email
-      }
-  )
+          name: this.state.name,
+          age: this.state.age,
+          email: this.state.email
+        })
       .then(res => {
-        console.log(res)
+        console.log(res.data)
         this.setState({ friends: res.data })
-
       })
       .catch(err => {
         console.log('errr' + err)
@@ -46,25 +46,29 @@ class App extends React.Component {
     this.setState({
         [event.target.name]: event.target.value
     })
-    console.log(this.state.name)
     }
 
   handleAge = event => {
     this.setState({
         [event.target.name]: event.target.value
     })
-    console.log(this.state.age)
     }
 
   handleEmail = event => {
     this.setState({
         [event.target.name]: event.target.value
     })
-    console.log(this.state.email)
     }
-  deleteFriend = (deletedFriend) => {
-    const newList = this.state.friends.filter(friend => friend !== deletedFriend);
 
+  deleteFriend = (friend) => {
+    axios.delete(`http://localhost:5000/friends/${friend.id}`)
+      .then(res => {
+        console.log(res.data);
+        this.setState({ friends: res.data })
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
   render() {
     return (
