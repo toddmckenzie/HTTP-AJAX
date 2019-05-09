@@ -4,32 +4,76 @@ import './friends.css'
 
 
 class Friends extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      name: '',
-      age: '',
-      email: '',
-      id: ''
+        friend: {
+        id: '',
+        name: '',
+        age: '',
+        email: ''
+      }
     }
   }
 
 
 autoUpdateFill = (friend) => {
   this.setState({
-    name: friend.name,
-    age: friend.age,
-    email: friend.email,
-    id: friend.id
+    friend: {
+      id: friend.id,
+      name: friend.name,
+      age: friend.age,
+      email: friend.email,
+    }
   })
 }
 
-handleName = event => {
-  console.log(event)
+handleNameChange = event => {
+  event.preventDefault();
+  console.log(event.target.value)
+  this.setState({
+      friend: {
+        id: this.state.friend.id,
+        [event.target.name]: event.target.value,
+        age: this.state.friend.age,
+        email: this.state.friend.email
+      }
+
+  })
+}
+
+
+handleEmailChange = event => {
+  event.preventDefault();
+  this.setState({
+    friend: {
+      id: this.state.friend.id,
+      name: this.state.friend.name,
+      age: this.state.friend.age,
+      [event.target.name]: event.target.value
+    }
+  })
+}
+
+handleAgeChange = event => {
+  event.preventDefault();
+  this.setState({
+    friend: {
+      id: this.state.friend.id,
+      name: this.state.friend.name,
+      [event.target.name]: event.target.value,
+      email: this.state.friend.email
+    }
+  })
 }
 
 
 render() {
+  console.log(this.state.friend)
+  console.log(this.state.friend.name)
+  console.log(this.state.friend.age)
+  console.log(this.state.friend.email)
+  console.log(this.state.friend.id)
   return (
     <div className='container'>
       <div className='friends'>
@@ -52,15 +96,15 @@ render() {
         <form onSubmit={this.props.addFriend}>
           <input type='text' placeholder='name' name='name' value={this.props.name} onChange={this.props.handleName}></input>
           <input type='text' placeholder='age' name='age' value={this.props.age} onChange={this.props.handleAge}></input>
-          <input type='text' placeholder='email' name='email' value={this.props.email} onChange={this.props.handleEmail}></input>
+          <input type='text'  placeholder='email' name='email' value={this.props.email} onChange={this.props.handleEmail}></input>
           <button onClick={this.props.addFriend} className='add'>Add Friend</button>
         </form>
 
-        <form onSubmit={this.props.updateFriend}>
-          <input type='text' placeholder='name' value={this.state.name} onChange={this.handleName}></input>
-          <input type='text' placeholder='age'  value={this.state.age} onChange={this.handleName}></input>
-          <input type='text' placeholder='email' value={this.state.email} onChange={this.handleName}></input>
-          <button onClick={this.props.updateFriend} className='add'>Update Friend</button>
+        <form onSubmit={(event) =>  this.props.updateFriend(event,this.state.friend) }>
+          <input type='text' name='name' value={this.state.friend.name} onChange={this.handleNameChange}></input>
+          <input type='text' name='age' value={this.state.friend.age} onChange={this.handleAgeChange}></input>
+          <input type='text' name='email' value={this.state.friend.email} onChange={this.handleEmailChange}></input>
+          <button onClick={(event) =>  this.props.updateFriend(event,this.state.friend) } className='add'>Update Friend</button>
         </form>
     </div>
     )

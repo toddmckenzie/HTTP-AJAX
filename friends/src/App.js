@@ -3,7 +3,7 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import Friends from './components/Friends';
 import axios from 'axios';
-import Update from './components/Update';
+//import Update from './components/Update';
 
 
 class App extends React.Component {
@@ -11,6 +11,7 @@ class App extends React.Component {
     super();
     this.state = {
       friends: [],
+        id: '',
         name: '',
         age: '',
         email: ''
@@ -80,11 +81,13 @@ class App extends React.Component {
       })
   }
 
-  updateFriend = (friend) => {
-    console.log(friend.id)
-    axios.put(`http://localhost:5000/friends/${friend.id}`)
+  updateFriend = (event,friend) => {
+    event.preventDefault()
+    console.log(friend)
+
+    axios.put(`http://localhost:5000/friends/${friend.id}`, friend)
       .then(res => {
-        console.log(res.data)
+        this.setState({ friends: res.data })
       })
       .catch(err => {
         console.log(err)
