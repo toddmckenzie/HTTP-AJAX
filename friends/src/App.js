@@ -3,6 +3,8 @@ import './App.css';
 import { Route } from 'react-router-dom';
 import Friends from './components/Friends';
 import axios from 'axios';
+import Update from './components/Update';
+
 
 class App extends React.Component {
   constructor() {
@@ -78,8 +80,8 @@ class App extends React.Component {
       })
   }
 
-  changeFriendName = (friend) => {
-    console.log(friend.name)
+  updateFriend = (friend) => {
+    console.log(friend.id)
     axios.put(`http://localhost:5000/friends/${friend.id}`)
       .then(res => {
         console.log(res.data)
@@ -93,7 +95,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Route path='/' render={props =>  <Friends  {...props}
+
+        <Route exact path='/' render={props =>  <Friends  {...props}
         friends={this.state.friends}
         name={this.state.name}
         age={this.state.age}
@@ -103,7 +106,8 @@ class App extends React.Component {
         handleEmail={this.handleEmail}
         addFriend={this.addFriend}
         deleteFriend={this.deleteFriend}
-        changeFriendName={this.changeFriendName}/>}
+        changeFriendName={this.changeFriendName}
+        updateFriend={this.updateFriend}/>}
         />
       </div>
     );
