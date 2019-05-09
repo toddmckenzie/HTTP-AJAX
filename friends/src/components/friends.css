@@ -1,0 +1,90 @@
+.container {
+  margin: 0 auto;
+  background-color: #D3D3D3;
+  height: 2000px;
+}
+
+.friends {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 40px;
+  border: 2px solid gray;
+  background-color: white;
+}
+.flexes {
+  display: flex;
+  justify-content: space-betweeen;
+  border-bottom: 1px dashed gray;
+  margin: 0 auto;
+  max-width: 1300px;
+  width: 100%;
+}
+.flexes:last-child {
+  border-bottom: none;
+}
+.flexes:hover {
+  background-color: #F0F8FF;
+}
+.name {
+  margin-left: 0px;
+  margin-right: 110px;
+  border: none;
+
+}
+
+.age {
+  margin-left: 20px;
+  margin-right: 110px;
+  border: none;
+
+}
+.email {
+  margin-left: 20px;
+  margin-right: 110px;
+  border: none;
+  
+}
+.name1 {
+  margin-left: 20px;
+  margin-right: 200px;
+  font-weight: bolder;
+}
+.age1 {
+  margin-left: 40px;
+  margin-right: 200px;
+  font-weight: bolder;
+}
+.email1 {
+  margin-left: 40px;
+  margin-right: 200px;
+  font-weight: bolder;
+}
+button {
+  border-radius: 20px;
+}
+
+button:hover {
+  background-color: black;
+  color: white;
+}
+
+
+input {
+  width: 280px;
+  height: 40px;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 40px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.add {
+  width: 140px;
+  height: 30px;
+}
+
+.add:hover {
+  background-color: black;
+  color: white;
+}
