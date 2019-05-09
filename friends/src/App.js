@@ -20,7 +20,7 @@ class App extends React.Component {
       .get('http://localhost:5000/friends')
       .then(res => {
         console.log(res.data)
-        this.setState({ friends: res.data})
+        this.setState({ friends: res.data })
       })
       .catch(err => console.log(err))
   }
@@ -28,18 +28,25 @@ class App extends React.Component {
 
   addFriend = event => {
     event.preventDefault();
-    axios.post('http://localhost:5000/friends', {
-          name: this.state.name,
-          age: this.state.age,
-          email: this.state.email
+    if (this.state.name.length > 0 && this.state.age.length > 0 && this.state.email.length > 0) {
+      axios.post('http://localhost:5000/friends', {
+            name: this.state.name,
+            age: this.state.age,
+            email: this.state.email
+          })
+        .then(res => {
+          console.log(res.data)
+          this.setState({ friends: res.data,
+          name: '',
+          age: '',
+          email: '' })
         })
-      .then(res => {
-        console.log(res.data)
-        this.setState({ friends: res.data })
-      })
-      .catch(err => {
-        console.log('errr' + err)
-      })
+        .catch(err => {
+          console.log('errr' + err)
+        })
+      }else {
+        alert('Please fill in all fields.')
+      }
   }
 
   handleName = event => {
@@ -70,16 +77,33 @@ class App extends React.Component {
         console.log(err)
       })
   }
+
+  changeFriendName = (friend) => {
+    console.log(friend.name)
+    axios.put(`http://localhost:5000/friends/${friend.id}`)
+      .then(res => {
+        console.log(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+
   render() {
     return (
       <div className="App">
         <Route path='/' render={props =>  <Friends  {...props}
         friends={this.state.friends}
+        name={this.state.name}
+        age={this.state.age}
+        email={this.state.email}
         handleName={this.handleName}
         handleAge={this.handleAge}
         handleEmail={this.handleEmail}
         addFriend={this.addFriend}
-        deleteFriend={this.deleteFriend}/>}
+        deleteFriend={this.deleteFriend}
+        changeFriendName={this.changeFriendName}/>}
         />
       </div>
     );
